@@ -1,0 +1,288 @@
+#참조예제
+#문자열에서 리스트 만들기
+str="친구가 연락을 씹어서 무시당하는 기분이었다"
+strlist=str.split()
+print(str.split())
+print(strlist)
+
+for i in strlist:
+    if i in ['무시당하는','화','불쾌','더러웠다']:
+        print('화가 나셨군요')
+    elif i in ['우울','슬픔','눈물','아픔','상처','서운함']:
+        print('기분이 우울하겠네요')
+
+>결과
+['친구가', '연락을', '씹어서', '무시당하는', '기분이었다']
+['친구가', '연락을', '씹어서', '무시당하는', '기분이었다']
+화가 나셨군요
+ 
+ 
+//
+
+>예제
+ans=input("결재하시겠습니까?")
+if ans in ['yes','y','ok','예','당근']:
+    print('구입해 주셔서 감사합니다')
+else:
+    print("안녕히계세요")
+
+>결과
+결재하시겠습니까?y
+구입해 주셔서 감사합니다
+
+요소가 있는지 검사할때는 in, not in 연산자를 사용한다. 답 목록을 리스트에 적어두고 그중 하나에 해당하는지만 조사하면 여러 조건을 한번에 검사할 수 있다.
+
+ 
+//
+ 
+#문제1 - 자격증을 입력해서 전공 일반 판단해주는 프로그램 완성
+lice = input("자격증을 입력하세요")
+if lice in ['정보처리산업기사','네트워크관리사','컴활1급','컴활2급']:
+print("전공학점인정 자격증입니다")
+else:
+print("일반학점인정 자격증입니다")
+
+>결과
+자격증을 입력하세요네트워크관리사
+전공학점인정 자격증입니다
+ 
+//
+
+ 
+>예제
+#정렬
+score = [88,95,70,100,99]
+score.sort()
+print(score) #오름차순
+score.reverse()
+print(score) #오름차순으로 정렬한것을 뒤집는다
+
+>결과
+[70, 88, 95, 99, 100]
+
+[100, 99, 95, 88, 70]
+ 
+sort 메서드는 리스트를 정렬하며 이 과정에서 요소의 순서가 조정되어 리스트 자체가 바뀐다. reverse메서드는 요소의 순서를 반대로 뒤집는다.
+
+
+//
+ 
+>예제
+#정렬
+score = [88,95,70,100,99]
+score.sort(reverse=True)
+print(score) #내림차순
+score.sort(reverse=False) #sort와 reverse로 차례로 호출할 필요가 없다.
+print(score) #오름차순(생략해도 같다)
+
+>결과
+[100, 99, 95, 88, 70]
+
+[70, 88, 95, 99, 100]
+
+score 인수는 두개의 키워드 인수를 가지는데  reverse 인수를 True로 지정하면 내림차순으로 정렬한다. 디폴트값이 False이다.(오름차순)
+
+ 
+//
+ 
+>예제
+country = ["Korea","Japan","CHINA","america"]
+country.sort()
+print(country)
+country.sort(key=str.lower) #임시로 소문자로 변경 후 정렬, 요소 자체가 바뀌는것은 아님
+print(country)
+ 
+>결과
+['CHINA', 'Japan', 'Korea', 'america']
+['america', 'CHINA', 'Japan', 'Korea']
+
+key인수는 정렬시 요소를 비교할 키를 추출하는 함수이다. 이 함수로 키를 번형하여 비교 기준으로 사용한다.
+
+
+//
+ 
+>예제
+score1 = [88,95,70,100,99]
+score1.sort()
+print(score1)
+ 
+score = [88,95,70,100,99]
+score2 = sorted(score)
+print(score) #원본은 유지됨
+print(score2)
+
+>결과
+[70, 88, 95, 99, 100]
+[88, 95, 70, 100, 99]
+
+[70, 88, 95, 99, 100]
+
+sort메서드는 리스트를 직접 정렬하는데 비해 sorted 내장 함수는 리스트는 그대로 두고 정렬된 새로운 리스트를 만들어 리턴한다. 원본은 유지되므로 정렬된 결과를 별도의 변수에 대입받아야 한다. sort메서드와 마찬가지로 reverse, key 키워드 인수를 통해 내림차순으로 정렬하거나 비교형식을 지정한다. 
+ 
+ 
+//
+ 
+#참조예제
+#리스트컴프리헨션
+list1 = [3,4,5]
+list2 = [x for x in list1]
+list3 = list1
+print(list1)
+print(list2)
+print(list3)
+
+>결과
+[3, 4, 5]
+[3, 4, 5]
+
+[3, 4, 5]
+ 
+
+//
+ 
+ 
+>예제
+list1 = [3,4,5]
+list2 = [x*2 for x in list1]
+print(list1)
+print(list2)
+
+>결과
+[3, 4, 5]
+
+[6, 8, 10]
+ 
+ 
+//
+ 
+>예제
+list1 = [x for x in range(10)]
+print(list1)
+ 
+list2 = [x for x in range(10) if x%2==0]
+print(list2)
+
+>결과
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+[0, 2, 4, 6, 8]
+
+
+//
+
+ 
+>예제
+#단어의 첫글자만 추출
+list1 = ["All", "good", "things", "must", "come", "to", "and", "end"]
+items = [word[0] for word in list1]
+print(items)
+ 
+#각 단어의 길이만 추출
+list1 = ["All", "good", "things", "must", "come", "to", "and", "end"]
+items_len = [len(word) for word in list1]
+print(items_len)
+
+>결과
+['A', 'g', 't', 'm', 'c', 't', 'a', 'e']
+
+[3, 4, 6, 4, 4, 2, 3, 3]
+ 
+ 
+//
+ 
+>예제
+colors = ["white", "sliver", "black"]
+cars = ["BMW", "Bentz", "sonata"]
+colored_car = [ (x,y) for x in colors for y in cars]
+print(colored_car)
+
+>결과
+[('white', 'BMW'), ('white', 'Bentz'), ('white', 'sonata'), ('sliver', 'BMW'), ('sliver', 'Bentz'), ('sliver', 'sonata'), ('black', 'BMW'), ('black', 'Bentz'), ('black', 'sonata')]
+
+ 
+//
+ 
+ 
+>예제
+#순차 탐색 - 함수 이용
+def linearSearch(alist, key):
+    for i in range(len(alist)): #리스트 길이만큼 반복횟수 지정
+        if key == alist[i]:
+            return i
+    return -1
+
+numbers = [10,20,30,40,50,60,70,80,90]
+position = linearSearch(numbers, 20)
+if position != -1:
+    print("탐색 성공 위치 : ", position)
+else:
+    print("탐색 실패")
+
+>결과
+탐색 성공 위치 :  1
+
+ 
+//
+ 
+>예제
+#조건을 만족하는 항목을 모두 찾기
+numbers = [10,20,30,40,50,60,70,80,90]
+result = []
+for value in numbers:
+    if value>=70:
+        result.append(value)
+print(result)
+
+>결과
+[70, 80, 90]
+
+ 
+//
+ 
+>예제
+#순차 탐색2 - 함수 이용
+result_key=[]
+def linearSearch(alist, key):
+    for i in range(len(alist)): #리스트 길이만큼 반복횟수 지정
+        if key == alist[i]:
+            result_key.append(i)
+    return -1
+
+numbers = [10,20,30,40,50,60,70,80,90,20]
+position = linearSearch(numbers, 20)
+if result_key != []:
+    print("탐색 성공 위치 : ", result_key)
+else:
+    print("탐색 실패")
+
+>결과
+탐색 성공 위치 :  [1, 9]
+ 
+ 
+ 
+//
+ 
+>예제
+#파일을 읽어서 리스트에 저장하기
+data = []
+data2 = []
+f = open("a.txt","r")
+
+for line in f.readline(): #한글자 단위
+    data.append(line.strip())
+print(data)
+
+strlist = (f.read()).split() #줄에서 단어
+print(strlist)
+
+>결과
+['q', 'w', 'e', 'r', 't', '']
+['sadf']
+
+>예제파일 : a.txt
+qwert
+sadf
+ 
+ 
+//
+ 

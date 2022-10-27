@@ -1,0 +1,136 @@
+1.포멧팅
+
+포멧팅은 문자열 사이사이에 다른 정보를 삽입하여 조립하는 기법이다. 문자열에 다음과 같은 표식을 넣고 뒤에 대응하는 변수를 밝히면 표식 자리에 정보가 삽입된다.
+
+%d 정수
+%f 실수
+%s 문자열
+%c 문자하나
+%h 16진수
+%o 8진수
+%% %문자
+
+
+>예제
+price = 500
+print("궁금하면", price, "원!")
+print("궁금하면"+ str(price) + "원!")
+print("궁금하면 %d원!" %price)
+print("궁금하면 %s원!" %price)
+
+month = 8
+day = 15
+anni = "광복절"
+print("%d월 %d일 %s이다!" %(month, day, anni))
+
+>결과
+궁금하면 500 원!
+궁금하면500원!
+궁금하면 500원!
+궁금하면 500원!
+8월 15일 광복절이다!
+
+
+
+
+>예제
+price = [30,13500,2000]
+for p in price:
+    print("가격:%d원" %p)
+
+for p in price:
+    print("가격:%7d원" %p)
+
+for p in price:
+    print("가격:%-7d원" %p)
+
+>결과
+가격:30원
+가격:13500원
+가격:2000원
+가격:     30원
+가격:  13500원
+가격:   2000원
+가격:30     원
+가격:13500  원
+가격:2000   원
+
+
+별도의 폭 지정이 없으면 변수의 자리수만큼 차지한다.
+%[-]폭[.유효자리수]서식
+%1d라고 지정했다고 해서 강제로 1 자리로 맞추지는 않는다. 서식이 지정하는 폭은 강제 폭이 아니라 최소폭이라서 작은 폭을 주어도 최소한 숫자의 자리수만큼은 차지한다.
+
+
+
+
+>예제
+name = "한결"
+age = 16
+height = 162.5
+print("이름:%s, 나이:%d, 키:%5.1f" %(name,age,height))
+#5.1f  -> 5자리중 소수점이하는 1자리
+
+print("이름:{}, 나이:{}, 키:{}".format(name,age,height))
+print("이름:{0}, 나이:{1}, 키:{2}".format(name,age,height))
+print("이름:{1}, 나이:{0}, 키:{2}".format(age,name,height))
+print("이름:{name}, 나이:{age}, 키:{height}".format(age=21,name="송이",height=175.2))
+
+boy = {"name":"한결","age":16,"height":162.5}
+print("이름:{0[name]}, 나이:{0[age]}, 키:{0[height]}".format(boy))
+
+>결과
+이름:한결, 나이:16, 키:162.5
+이름:한결, 나이:16, 키:162.5
+이름:한결, 나이:16, 키:162.5
+이름:한결, 나이:16, 키:162.5
+이름:송이, 나이:21, 키:175.2
+이름:한결, 나이:16, 키:162.5
+
+
+
+>예제
+print(1,2,3)
+print("%d %d %d"%(1,2,3))
+print("{} {} {}".format("1","2","3"))
+print("{2} {1} {0}".format("1","2","3")) #인덱스를 사용해 역순으로
+print("{a_} {b_} {c_}".format(a_=1, b_=2, c_=3))
+
+print("a" + " " + "b" + " " + "c")
+print("%c %c %c"%('a','b','c'))
+print("{} {} {}".format("a","b","c"))
+print("{2} {1} {0}".format("a","b","c")) #인덱스를 사용해 역순으로
+print("al:{a1} b1:{b1} c1:{c1}".format(a1='a', b1='b', c1='c'))
+
+>결과
+1 2 3
+1 2 3
+1 2 3
+3 2 1
+1 2 3
+a b c
+a b c
+a b c
+c b a
+al:a b1:b c1:c
+
+
+
+>예제
+#I ate 3 apples, I was sick for three days
+num=3
+day="three"
+print("I ate %d apples, I was sick for %s days" %(num,day))
+print("I ate %d apples, I was sick for %s days" %(3,"three"))
+
+age =40; name="chkim"
+print("I'm {0} years old".format(age))
+print("My name is {0} and {1} years old".format(name,age))
+print("My name is {0} and {1} years old".format("chkim",40))
+
+>결과
+I ate 3 apples, I was sick for three days
+I ate 3 apples, I was sick for three days
+I'm 40 years old
+My name is chkim and 40 years old
+My name is chkim and 40 years old
+

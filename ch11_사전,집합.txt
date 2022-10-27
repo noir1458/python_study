@@ -1,0 +1,359 @@
+사전(dictonary)은 키와 값의 쌍을 저장하는 대용량의 자료구조이다. 해시 알고리즘을 사용해 일대일로 대응되는 특성이 있어 맵이라고도 부르고 관련된 키와 값의 쌍이라고 해서 연관배열이라고도 부른다.
+
+>예제
+#사전(딕셔너리) 키:값
+dic = {'boy':'소년', 'school':'학교', 'book':'책'}
+print(dic)
+print(dic['boy'])
+print(dic['book'])
+print(dic.get('student'))
+print(dic.get('boy'))
+print(dic.get('book'))
+print(dic.get('student','사전에 없는 단어입니다'))
+
+>결과
+{'boy': '소년', 'school': '학교', 'book': '책'}
+소년
+책
+None
+소년
+책
+사전에 없는 단어입니다
+
+키는 값을 찾는 고유의 기준이라서 중복되지 않는 고유의 값이어야 되지만 값은 중복되어도 상관없다. 사전에 단어가 두번 나올수는 없지만 비슷한 뜻을 가진 단어는 얼마든지 있을수 있는것과 유사하다.
+키는 읽기 전용이여서 변경이 불가능하다. 그러므로 튜플은 키로 쓸수 있지만 리스트는 불가능하다.
+값은 자유롭게 변경 가능하다.
+
+사전은 빠른 검색을 위해 키로부터 저장하는 위치를 결정하며 최대한 찾기 쉬운 위치에 저장하므로 순서를 유지하지 않는다.
+
+dic['boy']는 boy를 키로해서 값을 찾는다. 순서가 없기 때문에 첨자로는 읽을수 없고 키로부터 값을 찾는다.
+찾는 키가 없다면 키가 없다는 예외가 발생한다. 예외처리구문으로 감싸는게 불편하다면 get 메서드로 값을 찾으면 된다. 키가 없을때 None을 리턴하며, 두번째 인수로 대신 돌려줄 디폴트값을 지정할수 있다.
+
+
+//
+
+>예제
+dic = {'boy':'소년', 'school':'학교', 'book':'책'}
+
+if 'student' in dic:
+    print("사전에 있는 단어입니다.")
+else:
+    print('사전에 없는 단어입니다')
+
+>결과
+사전에 없는 단어입니다
+
+특정 키가 사전에 있는지 조사하려면 in 구문을 사용한다
+
+
+
+//
+
+>예제
+li = {'정보처리':'16', '네트워크':'14', '컴활1급':'14'}
+a = input("자격증 입력")
+
+if a in li:
+    print("%s학점 입니다" %li[a])
+    print(li.get(a))
+else:
+    print('없는 자격증입니다')
+
+>결과
+자격증 입력정보처리
+16학점 입니다
+16
+
+
+//
+
+>예제
+#추가,수정,삭제
+li = {'정보처리':'16', '네트워크':'14', '컴활1급':'14'}
+li['정보처리'] = '17'
+print(li)
+li['사무자동']='16'
+li['컴활2급']='6'
+print(li)
+del li['사무자동']
+print(li)
+
+#키,값,키와 값 출력
+print(li.keys())
+print(li.values())
+print(li.items())
+
+>결과
+{'정보처리': '17', '네트워크': '14', '컴활1급': '14'}
+{'정보처리': '17', '네트워크': '14', '컴활1급': '14', '사무자동': '16', '컴활2급': '6'}
+{'정보처리': '17', '네트워크': '14', '컴활1급': '14', '컴활2급': '6'}
+dict_keys(['정보처리', '네트워크', '컴활1급', '컴활2급'])
+dict_values(['17', '14', '14', '6'])
+dict_items([('정보처리', '17'), ('네트워크', '14'), ('컴활1급', '14'), ('컴활2급', '6')])
+
+사전[키] 식에 값을 대입하면 키의 존재여부에 따라 동작이 달라진다. 이미 존재하면 키의 중복을 허락하지 않으므로 기존의 값이 변경되며, 없는 키에 값을 대입하면 새로운 키와 쌍이 추가되어 요소가 늘어난다.
+
+요소를 삭제할때는 del명령을 사용하여 해당 키를 찾아 값과 함께 사전에서 삭제한다. 모든 요소를 삭제하여 비울때는 clear메서드를 호출한다.
+
+
+//
+
+>예제
+dic = {'boy':'소년','school':'학교','book':'책'}
+keylist = dic.keys()
+for key in keylist:
+    print(key)
+
+>결과
+boy
+school
+book
+
+사전의 키, 값, 목록을 어등려면 keys, values 메서드를 호출한다. keys 메서드는 dict_key라는 리스트 객체를 리턴하며 이 안에는 키의 목록만 들어있다. value 메서드는 값의 목록만 들어있다. items 메서드는 키와 값의 쌍을 튜플로 묶은 객체를 리턴한다. 이 객체는 리스트처럼 순회 가능하다.
+그러나 진짜 리스트는 아니어서 append, insert 등의 편집 함수를 호출할 수는 없다. list() 함수로 변환하면 가능하다.
+
+
+
+//
+
+>예제
+#사전병합 : update
+dic = {'boy':'소년','school':'학교','book':'책'}
+dic2 = {'student':'학생','teacher':'선생님','book':'서적'}
+dic.update(dic2)
+print(dic)
+
+>결과
+{'boy': '소년', 'school': '학교', 'book': '서적', 'student': '학생', 'teacher': '선생님'}
+
+중복되는 키가 있으면 병합되는 키의 값이 적용된다. dic2에 있는 단어가 dic에 삽입된다. dic2의 값이 적용되어 dic의 book키는 '서적' 으로 바뀐다
+
+
+//
+
+
+>예제
+list1 = [['boy','소년'],['school','학교'],['book','책']]
+dic = dict(list1)
+print(dic)
+
+>결과
+{'boy': '소년', 'school': '학교', 'book': '책'}
+
+dict 함수는 빈 사전을 만들기도 하고 다른 자료형을 사전으로 변환하기도 한다. 2차원 리스트를 사전으로 바꿀 수 있는데 내부 리스트의 첫 요소는 키가 되고 두번째 요소는 값이 된다.
+
+
+//
+
+
+>예제
+song = """Yesterday, all my troubles seemed so far away
+Now it looks as though they're here to stay
+Oh, I believe in yesterday
+Suddenly, I'm not half the man I used to be
+There's a shadow hanging over me
+Oh, yesterday came suddenly
+Why she had to go I don't know she wouldn't say
+I said something wrong, now I long for yesterday
+Yesterday, love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Why she had to go I don't know she wouldn't say
+I said something wrong, now I long for yesterday
+Yesterday, love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Mm mm mm mm mm mm mm"""
+
+alphabat = dict()
+for c in song:
+    if c.isalpha() == False:
+        continue
+    c=c.lower()
+    if c not in alphabat:
+        alphabat[c] = 1
+    else:
+        alphabat[c] +=1
+print(alphabat)
+
+key = list(alphabat.keys())
+key.sort()
+for c in key:
+    num = alphabat[c]
+    print(c,"=>",num)
+
+>결과
+{'y': 34, 'e': 65, 's': 36, 't': 31, 'r': 19, 'd': 28, 'a': 45, 'l': 20, 'm': 24, 'o': 43, 'u': 9, 'b': 5, 'f': 4, 'w': 19, 'n': 30, 'i': 27, 'k': 3, 'h': 27, 'g': 13, 'v': 6, 'c': 5, 'p': 4}
+a => 45
+b => 5
+c => 5
+d => 28
+...
+
+사전은 키의 중복을 허락하지 않으면서 연관된 정보를 저장하므로 실용적이다. 대량의 관련정보를 저장가능하고 빠르게 검색 가능하다. [] 괄호만으로 추가 수정이 가능해 사용하기도 쉽다.
+
+
+//
+
+
+>예제
+#딕셔너리 정렬
+dic = {'bags':1,'books':5,'bottles':4,'coins':4,'cups':2,'pens':1}
+print(dic)
+
+#dic_list = list(dic)
+#print(dic_list)
+
+#dic_list1 = list(dic.keys()) #list(dic.keys()) == list(dic)
+#print(dic_list1)
+
+print(sorted(dic))
+print(sorted(dic.values()))
+print(sorted(dic,key=dic.__getitem__))
+
+>결과
+{'bags': 1, 'books': 5, 'bottles': 4, 'coins': 4, 'cups': 2, 'pens': 1}
+['bags', 'books', 'bottles', 'coins', 'cups', 'pens']
+[1, 1, 2, 4, 4, 5]
+['bags', 'pens', 'cups', 'bottles', 'coins', 'books']
+
+
+
+
+//
+
+
+>예제
+song = """Yesterday, all my troubles seemed so far away
+Now it looks as though they're here to stay
+Oh, I believe in yesterday
+Suddenly, I'm not half the man I used to be
+There's a shadow hanging over me
+Oh, yesterday came suddenly
+Why she had to go I don't know she wouldn't say
+I said something wrong, now I long for yesterday
+Yesterday, love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Why she had to go I don't know she wouldn't say
+I said something wrong, now I long for yesterday
+Yesterday, love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Mm mm mm mm mm mm mm"""
+
+alphabat = dict()
+for c in song:
+    if c.isalpha() == False:
+        continue
+    c=c.lower()
+    if c not in alphabat:
+        alphabat[c] = 1
+    else:
+        alphabat[c] +=1
+print(alphabat)
+
+#key = list(alphabat.keys())
+#key.sort()
+#for c in key:
+# num = alphabat[c]
+# print(c,"=>",num)
+
+print(sorted(alphabat,key=alphabat.__getitem__, reverse=True))
+
+>결과
+{'y': 34, 'e': 65, 's': 36, 't': 31, 'r': 19, 'd': 28, 'a': 45, 'l': 20, 'm': 24, 'o': 43, 'u': 9, 'b': 5, 'f': 4, 'w': 19, 'n': 30, 'i': 27, 'k': 3, 'h': 27, 'g': 13, 'v': 6, 'c': 5, 'p': 4}
+['e', 'a', 'o', 's', 'y', 't', 'n', 'd', 'i', 'h', 'm', 'l', 'r', 'w', 'g', 'u', 'v', 'b', 'c', 'f', 'p', 'k']
+
+
+//
+
+
+
+
+10-2. 집합
+집합은 여러가지 값의 모임이며 수학때 배운것과 같다. 집합을 정의할떄는 {} 괄호 안에 키를 콤마로 구분해서 나열한다. 사전을 정의하는 괄호와 같지만 값은 없고 키만 있다는 점이 다르다.
+
+>예제
+#집합
+asia = {'korea','china','japan','korea'}
+print(asia)
+
+#집합에 대한 추가,제거
+asia.add("vietanam")
+print(asia)
+asia.add("china")
+print(asia)
+asia.remove("china")
+print(asia)
+asia.update({'hongkong','china','korea'})
+print(asia)
+
+>결과
+{'japan', 'korea', 'china'}
+{'japan', 'korea', 'vietanam', 'china'}
+{'japan', 'korea', 'vietanam', 'china'}
+{'japan', 'korea', 'vietanam'}
+{'japan', 'korea', 'china', 'vietanam', 'hongkong'}
+
+asia 집합은 나라이름을 나열한다. 집합은 값을 포함하고 있느냐 아니냐만 중요할뿐 키의 중복은 허락하지 않으며 순서도 의미가 없다. 초기 식에 'korea'요소가 두개 있지만 결과적으로는 하나만 저장된다.
+
+집합은 수정 가능한 자료형이므로 언제든지 키를 넣고 뺄 수 있다. 추가할때는 add메서드 원소를 제거할때는 remove 메서드를 사용한다. update 메서드는 집합끼리 결합해서 합집합을 만든다.
+
+
+//
+
+
+>예제
+print(set("qwerty"))
+print(set("12,34,56,78"))
+print(set({'boy':'소년','school':'학교','book':'책'}))
+print(set())
+
+>결과
+{'y', 't', 'w', 'r', 'q', 'e'}
+{'3', '4', '6', '8', '5', ',', '2', '1', '7'}
+{'book', 'boy', 'school'}
+set()
+
+set() 함수는 빈 집합을 만들기도 하고 다른 컬렉션을 집합형으로 변환하기도 한다. 문자열은 개별 문자들이 집합의 원소가 되는데 중복이 제거된다. 순서는 중요하지 않아서 원본 단어에 있던 순서와 달라진다. 리스트와 튜플도 집합으로 변환이 가능하고 사전은 키만 빼내며 값은 버린다.
+
+공집합을 만들때는 {} 이렇게 쓰면 빈 사전이 만들어진다. set() 로 호출해야 공집합을 만들 수 있다. print함수도 {}가 아닌 set()로 출력해서 사전이 아닌 집합임을 명시한다.
+
+
+
+
+//
+
+
+>예제
+#집합연산
+a = {1,2,3,4,5}
+b = {1,2,3,7,8,9}
+
+print("교집합: ", a&b)
+print("합집합: ", a|b)
+print("차집합: ", a-b)
+print("차집합: ", b-a)
+print("배타적 차집합: ", a^b)
+
+>결과
+교집합:  {1, 2, 3}
+합집합:  {1, 2, 3, 4, 5, 7, 8, 9}
+차집합:  {4, 5}
+차집합:  {8, 9, 7}
+배타적 차집합:  {4, 5, 7, 8, 9}
+
+
+
+//
+
+>예제
+a = {1,2,3,4,5}
+print(7 in a)
+
+>결과
+False
+
+특정 원소가 집합에 포함되어 있는지는 in 연산자로 조사한다.
+

@@ -1,0 +1,313 @@
+1. 문자열 분리
+
+1.1. 첨자
+
+문자열은 메모리상에 개별 문자들이 일렬로 늘어선 형태로 저장된다. 문자열을 구성하는 개별 문자를 읽을떄는 []괄호와 문자의 위치인 첨자를 적는다
+
+0  1  2  3  4  5
+p  y  t  h  o  n
+-6 -5 -4 -3 -2 -1
+
+앞에서 셀때는 0부터, 뒤에서 셀때는 -1부터 센다.
+
+
+[예제]
+s = "python"
+print(s[2])
+print(s[-2])
+print()
+
+for c in s:
+    print(c, end='/')
+print()
+
+print(len(s))
+
+for i in range(len(s)):
+    print(s[i],end='/')
+
+>결과
+t
+o
+
+p/y/t/h/o/n/
+6
+p/y/t/h/o/n/
+
+
+문자열은 문자로 구성된 리스트의 일종이라 for문으로 순회하며 개별 문자를 순서대로 꺼낼수 있다.
+
+
+[예제]
+s = "python"
+for i in range(len(s)):
+    print(s[len(s)-1-i],end='/')
+
+print()
+n = len(s)-1
+for i in range(n, -1, -1):
+    print(s[i],end='/')
+
+>결과
+n/o/h/t/y/p/
+n/o/h/t/y/p/
+
+
+
+파이썬의 문자열은 변경 불가능한 (immutable) 자료형이라서 한번 초기화 되면 바꿀 수 없다. []로는 개별 문자를 읽을 수만 있으며 다른문자를 대입하거나 삽입, 삭제할수는 없다.
+편집을 금지하면 메모리를 절약하고 속도가 빨라지기 떄문이다. 문자열을 바꿔야 할 경우 변경된 문자열을 새로 만드는 방식을 사용한다.
+
+
+
+
+1.2. 첨자
+[] 괄호에 첨자를 하나만 적으면 해당 위치의 문자를 읽지만, 범위를 지정하면 부분 문자열을 추출한다.
+[begin:end:step]
+시작 , 끝, 증가값을 지정한다. range함수와 구조가 같다.
+
+>예제
+yoil = '월화수목금토일'
+print(yoil[2:4])
+print(yoil[::2])
+print(yoil[::1])
+print(yoil[::-1])
+print(yoil[::-2])
+
+
+>결과
+수목
+월수금일
+월화수목금토일
+일토금목수화월
+일금수월
+
+
+
+2. 문자열 메서드
+
+2.1.검색, 조사
+
+문자열은 수치형에 비해 복잡하고 길이도 가변적이라서 자유롭게 조작하기 어렵다. 그래서 문자열을 관리하는 여러 함수가 제공된다.
+
+>예제
+s="python programming"
+#검색
+print(len(s))  #문자열 길이
+print(s.find('o'))  #문자열에서 해당 문자가 있는 인덱스값 왼쪽부터 4
+print(s.find('z'))  #문자열에서 해당 문자가 있는 인덱스값, 없으면 -1
+print(s.rfind('o'))  #문자열에서 해당 문자가 있는 인덱스값 오른쪽부터 9 (rear)
+print(s.index('o'))  #문자열에서 해당 문자 있는 인쪽부터 스캔 4
+print(s.count('o'))  #문자열에서 해당 문자 개수 2
+print(s.count('p'))  #문자열에서 해당 문자 개수 2
+print(s.count('python'))  #문자열에서 해당 문자 개수 1
+
+#조사
+print('a' in s)   #문자가 있는지 없는지 조사, 있으면 true
+print('z' in s)
+print('python' in s)
+print('z' not in s) #문자열에서 문자가, 없으면 true
+print(s in s)
+
+>결과
+18
+4
+-1
+9
+4
+2
+2
+1
+True
+False
+True
+True
+True
+
+len 함수는 문자열의 길이를 조사하는데 인수로 문자열을 전달하면 문자의 개수를 리턴한다. 내장함수라서 문자열뿐만 아니라 리스트, 튜플같은 다른 컬렉션에도 사용할수 있으며 요소의 개수를 리턴한다.
+
+메서드는 클래스에 소속되어 이있는 함수이며 객체에 대해 특화된 작업을 수행한다. 객체.메서드() 식으로 대상 객체가 매서드를 호출한다. 내장 함수와 객체 소속의 메서드는 호출방식이 다르다
+len 함수는 내장이라서 s.len() 이 아닌 len(s)로 호출한다
+
+in, not in 은 함수가 아닌 키워드라서 "단어 in 문자열" 형식으로 사용한다. 리스트, 튜플, 사전등의 컬렉션에 공통적으로 적용된다
+
+
+
+>예제
+#시작문자
+name="김한결"
+if name.startswith("김"):
+    print("김씨입니다")
+
+file="a1.jpg"
+if file.endswith(".py"):
+    print("파이썬 파일입니다")
+if file.endswith("jpg"):
+    print("그림 파일입니다")
+
+>결과
+김씨입니다
+그림 파일입니다
+
+startswith 메서드는 특정 문자열로 시작되는지 조사한다. 문자열 전체나 중간이 아닌 앞부분의 일부만 비교한다.
+endswith는 특정 문자열로 끝나는지 뒷부분만 조사한다
+
+
+isalpha 모든문자가 알파벳인지 조사
+islower 모든문자가 소문자인지 조사
+isupper 모든문자가 대문자인지 조사
+isspace 모든 문자가 공백인지
+isalnum 모든 문자가 알파벳,숫자인지
+isdecimal 모든 문자가 숫자인지
+isdigit 모든 문자가 숫자인지
+isnumeric 모든 문자가 숫자인지
+isidentifier 명칭으로만 쓸수있는 문자로만 구성되어 있는지
+isprintable 인쇄가능한 문자로만 구성되어 있는지
+
+
+
+ex) height.isdecimal()
+결과는 True 또는 False
+
+
+
+2.2. 변경
+
+대소문자의 개념은 알파벳에만 있을뿐 숫자, 한글, 기호에는 해당되지 않아 영문자가 아닌 문자는 원래대로 유지된다.
+
+>예제
+s = "Good morning. my love KIM"
+print(s.lower())
+print(s.upper())
+print(s) #메모리 저장된 내용은 그대로
+
+print(s.swapcase()) #소->대, 대->소 문자로 변경
+print(s.capitalize())  #첫글자만 대문자로
+print(s.title())  #단어마다 첫글자만 대문자
+print(s)
+
+>결과
+good morning. my love kim
+GOOD MORNING. MY LOVE KIM
+Good morning. my love KIM
+gOOD MORNING. MY LOVE kim
+Good morning. my love kim
+Good Morning. My Love Kim
+Good morning. my love KIM
+
+lower는 모두 소문자로 바꾼 새로운 문자열을 리턴할뿐, 문자열 자체를 변경하지는 않는다.
+s=s.lower() 이렇게 다시 대입해야 바꿔진다.
+다른 문자열 변경 메서드도 문자열 자체는 건드리지 않고 변경된 새로운 문자열을 리턴한다.
+
+
+>예제
+s="     angel     "
+print(s+"님")
+print(s.lstrip()+"님")
+print(s.rstrip()+"님")
+print(s.strip()+"님")
+
+>결과
+     angel     님
+angel     님
+     angel님
+angel님
+
+
+
+2.3.분할
+split 메서드는 구분자를 기준으로 분자열을 분할한다. 하나의 문자열이 여러개의 부분 문자열로 쪼개져 리스트에 저장한다.
+
+>예제
+#분할
+s1 = "짜장 짬뽕 탕슉"
+print(s1)
+print(s1.split())
+print(s1.split()[0])
+print(s1.split()[1])
+print(s1.split()[2])
+
+s2 = "서울->대전->대구->부산"
+city = s2.split("->")
+print(city)
+for c in city:
+    print(c, "찍고", end=', ')
+
+
+>결과
+짜장 짬뽕 탕슉
+['짜장', '짬뽕', '탕슉']
+짜장
+짬뽕
+탕슉
+['서울', '대전', '대구', '부산']
+서울 찍고, 대전 찍고, 대구 찍고, 부산 찍고,
+
+
+인수 없이 그냥 호출하면 공백을 기준으로 문자열을 분할한다. 즉 디폴트 문자는 공백이어서 문자열을 구성하는 단어를 분할한다.
+
+
+>예제
+score = "70 80 90 100 12 30 55"  #분리해서 합 구하기
+score_ = score.split()
+sum = 0
+for c in score_:
+    sum += int(c)
+print("합계는 :", sum)
+
+>결과
+합계는 : 437
+
+
+
+2.4.연결
+
+>예제
+#연결
+s = "_"
+print(s.join("대한민국"))
+
+s2 = "서울->대전->대구->부산"
+city = s2.split("->")
+print(" 찍고, ".join(city))
+
+>결과
+대_한_민_국
+서울 찍고, 대전 찍고, 대구 찍고, 부산
+
+
+join 메서드를 호출하는 문자열이 삽입 대상임에 유의하자.
+
+
+
+2.5.대체
+
+>예제
+#대체
+s = "서울->대전->대구->부산."
+print(s)
+print(s.replace("->", "/"))
+
+>결과
+서울->대전->대구->부산.
+서울/대전/대구/부산.
+
+
+필요하다면 세번째 인수로 바꿀 개수를 지정해서 앞쪽의 일부만 교체할 수도 있다. 정규표현식을 사용하면 더 정밀한 검색과 대체도 가능하다
+
+
+
+2.6.정렬
+
+>예제
+#정렬
+message = "안녕하세요"
+print(message.ljust(30))
+print(message.rjust(30))
+print(message.center(30))
+
+>결과
+안녕하세요
+                         안녕하세요
+            안녕하세요
+
+

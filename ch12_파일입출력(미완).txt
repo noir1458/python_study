@@ -1,0 +1,480 @@
+#파일입출력
+#파일의 종류
+# - 텍스트파일
+# - 바이너리파일(실행가능파일, 이미지파일, 오디오파일)
+#파일사용 3단계 （열기 -> 사용 -> 닫기)
+#inf = open(‘data.txt’, ‘r’)
+# ’r’ : 읽기모드
+# 'w' : 쓰기모드 (기존 파일은 지우고 새로 만들어짐)
+# 'a' : 쓰기모드 (기존 파일을 지우지 않고 이어서 추가로 쓴다)
+##메소드 중요!
+#inf.read(n) : inf에서 n개의 글자 읽어서 문자열로 리턴
+#inf.read : inf에서 파일내용이 끝날 때 까지 문자를 읽어 문자열로 리턴
+#inf.readline : inf에서 ‘\n’ 만날 때 까지 한줄을 읽어 문자열로 리턴
+#inf.readlines : inf에서 파일내용이 끝날 때 까지 문자를 읽어서 list(배열) 형태로 리턴
+#outfile.write(s) : 문자열 s를 ‘outfile’에 쓴다
+#inf.close() : 파일을 닫는다
+#--파일에서 9개 문자읽음
+inf=open("abc.txt",'r')
+s = inf.read(9)
+print('inf.read(8) =',s)
+inf.close()
+
+#--파일에서 전체문자 읽음
+inf=open("abc.txt",'r')
+s = inf.read()
+print('inf.read() =',s)
+inf.close()
+
+#--파일에서 한줄을(엔터전까지) 읽음
+inf=open("abc.txt",'r')
+s = inf.readline()
+print('inf.readline() =',s)
+inf.close()
+
+#--파일에서 줄단위(엔터키구분)로 모두읽음 - 리스트로
+inf=open("abc.txt",'r')
+sl = inf.readlines()
+print('inf.readlines() sl[0] =',sl[0])
+print('inf.readlines() sl[1] =',sl[1])
+print('inf.readlines() sl[2] =',sl[2])
+print('inf.readlines() =',sl)
+inf.close()
+
+#--readlines() 로 읽어서 줄단위(엔터키 구분)로 출력
+inf=open("abc.txt",'r')
+sl= inf.readlines()
+print(len(sl))
+for i in range(len(sl)):
+print(sl[i])
+inf.close()
+
+//
+
+
+#숫자 데이터 파일에서 합계와 평균을 구하는 프로그램
+inf = open("number.txt", 'r')
+s = inf.readlines()
+sum = 0
+mean = 0
+for i in range(len(s)):
+#print(s[i])
+sum = sum + int(s[i])
+mean = sum/len(s)
+print("sum =", sum)
+print("mean =", round(mean,2))
+inf.close()
+
+
+//
+
+#글자수, 가장 긴 문장
+inf=open("abc.txt",'r')
+s = inf.readlines()
+long = 0
+longindex = 0
+sum = 0
+for i in range(len(s)): #파일의 줄수
+#print(s[i])
+sum = sum + len(s[i]) #각 줄에서 문자열길이(문자갯수)
+
+for i in range(len(s)):
+if len(s[i])>long:
+long = len(s[i])
+longindex = i
+print("공백을 포함한 전체 문장의 길이")
+print(sum)
+print("가장 긴 문장 길이%d 가장 긴 문장 인덱스%d" %(long,longindex))
+inf.close()
+
+//
+
+
+#readline()s는 한줄 단위로 읽어서 문자열 리스트 생성
+inf = open("abc.txt",'r')
+#s = inf.readlines()
+s = inf.read()
+#print(s)
+
+#slist = []
+#for i in range(len(s)):
+# slist = slist + s[i].split()
+
+slist = s.split()
+#print(slist)
+for x in range(len(slist)):
+print(slist[x])
+inf.close()
+
+
+#---------------
+inf = open("abc.txt",'r')
+s = inf.readlines()
+print(s)
+
+slist = []
+for i in range(len(s)):
+slist = slist + s[i].split()
+
+print(slist)
+for x in range(len(slist)):
+print(slist[x])
+inf.close()
+
+#readline으로 한줄을 읽어서 리스트로 변환해서 - 단어 단위출력
+inf = open("2.txt",'r')
+s = inf.readline() # read 도 같은 결과
+print(s)
+
+slist = s.split()
+print(slist)
+for x in range(len(slist)):
+print(slist[x])
+inf.close()
+
+
+##readline으로 한줄을 읽어서 리스트로 변환해서 - 숫자, 숫자, 숫자...
+inf = open("n.txt",'r')
+s = inf.readline() # read 도 같은 결과
+print(s)
+
+slist = s.split(',')
+sum = 0
+for i in range(len(slist)):
+sum = sum + int(slist[i])
+print(sum)
+inf.close()
+
+
+//
+
+
+#문제1)문제2) 전체합,줄단위합
+
+##readlines으로 - 숫자, 숫자...\n 숫자,숫자...\n
+inf = open("n1.txt",'r')
+s = inf.readlines()
+print(s)
+sumlist=[]
+for i in range(len(s)):
+slist = s[i].split(',')
+sum1 = 0
+for j in range(len(slist)):
+sum1 = sum1 + int(slist[j])
+sumlist.append(sum1)
+print("각줄합계 : ", sumlist)
+print("전체자료합 : %d" %(sum(sumlist)))
+inf.close()
+
+#전체합변수를 밖에 =0으로 선언
+#각 줄마다 출력하고 합 따로해도 됨
+
+//
+
+
+
+
+//
+abc.txt
+>
+Yesterday
+All my troubles seemed so far away
+Now it looks as though they're here to stay
+Oh, I believe in yesterday
+
+Suddenly
+I'm not half the man I used to be
+There's a shadow hanging over me
+Oh, yesterday came suddenly
+
+Why she had to go,
+I don't know She wouldn't say
+I said something wrong
+Now I long for yesterday
+
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+
+Why she had to go,
+I don't know She wouldn't say
+I said something wrong
+Now I long for yesterday
+
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Mm mm mm mm mm mm mm mm.....
+
+//
+e.txt
+
+>
+All my troubles seemed so far away
+
+
+//
+n.txt
+
+>
+100,90,80,67,31,80,88,90,90
+
+//
+n1.txt
+
+>
+
+100, 90, 80, 67, 31
+99, 87, 81, 66, 32
+90, 91, 21, 65, 30
+98, 77, 89, 99,78
+99, 90, 80, 67, 29
+
+//
+
+number.txt
+
+>
+
+100
+90
+80
+67
+31
+80
+88
+90
+90
+
+
+//
+
+
+
+
+
+
+
+
+////
+
+'''
+resutlt = [];
+diff 0
+ 
+inf = open("h.txt",'r')
+s = inf.readlines()
+length = len(sm) #5
+result = []
+diff = 0
+ 
+for i in range(length):
+s = sm[i].split() #slist = s[i].split(',')
+diff = float(s[5]) - float(s[1])
+result.append((s[0]),diff)
+inf.close
+ 
+for j in range(length):
+print(result[j][0],"님은 5년간 키가",result[j][1],"cm자랐어요.")
+ 
+outf =
+...
+ 
+ 
+'''
+##p1 파일을 읽어 p2만큼 반복하기
+inf = open("p1.txt","r")
+outf = open = ("p2.txt","w")
+for i in ran (10):
+s = inf.readline()
+s = s + '\n'
+outf.write(s)
+ 
+ 
+//
+ 
+##리스트는 같은 타입의 data집합이다 : 틀림
+ 
+//
+t1 =['x','y','z']
+t1.append('a')
+t1
+['x','y','z','a']
+t1.append('e')
+print(t1)
+ 
+//
+ 
+t1 =['x','y','z']
+t1.insert(1,'a')
+t1
+['x','y','z','a']
+t1.insert(1,'e')
+print(t1)
+//
+ 
+t1 =['z','x','y']
+t1.sort()
+print(t1)
+ 
+//
+ 
+t =['z','x','y']
+ 
+x = t.pop(0)+t.pop(1)
+print(t)
+t.append("a")
+print(t)
+ 
+//
+ 
+t =['z','x','y']
+t.remove('x')
+print(t)
+ 
+//
+ 
+f1 = ['apple','blueberry','melon','tomato']
+f2 = ['strawberry','lemon','banana']
+f3 = f1+f2
+print(f3)
+f3.sort()
+print(f3)
+//
+ 
+f1 = ['apple','blueberry','melon','tomato']
+f2 = ['strawberry','lemon','banana']
+f3 = f1+f2
+print(f3)
+f3.sort()
+print(f3)
+#remove element with its first char'b'
+index = len(f3)
+print(index)
+i=0
+while i<index:
+if f3[i][0]=='b':
+f3.remove(f3[i])
+i=i-1
+index=index-1
+i=i+1
+print("remob all 'b'element,f3")
+ 
+ 
+//
+ 
+msg = input("좋아하는 영문장입력")
+msglist=msg.split()
+print("list:",msglist)
+ 
+removeword = input("제거단어입력")
+msglist.remove(removeword)
+print("제거후 list:",msglist)
+ 
+addword = input("추가할 영문장입력")
+msglist.append(addword)
+print("추가후 list:",msglist)
+ 
+delimiter = " "
+Str = delimiter.join(msglist)
+print("join 후 문자열 :" ,Str)
+ 
+//
+ 
+ 
+t=(11,3,15,7,9)
+list(t)
+print(t)
+ 
+#t.sort()
+#print(t)
+#바꾸고 정렬
+ 
+//
+s ='abc'
+t=[0,1,2]
+print(list(zip(s,t)))
+#[('a',0),('b',1),('c',2)]
+#2개 문자열개수가 다른경우, 작은개수 기준으로 생성
+print(list(zip('Anne','Elk')))
+ 
+//
+ 
+ 
+//
+ 
+t사전형 연산
+len()
+k in dictionary name
+..
+ 
+ 
+//
+ 
+c_code = {1:'a',20:'e',30:'g',39:'i',81:'j',82:'k'}
+print(len(c_code))
+ 
+print(c_code[30])
+print(c_code[82])
+ 
+print(82 in c_code)
+print(60 in c_code)
+ 
+c_code[60]='m'
+print(60 in c_code)
+ 
+c_code.pop(81)
+print(81 in c_code)
+ 
+ 
+//
+ 
+c_code = {1:'a',20:'e',30:'g',39:'i',81:'j',82:'k'}
+print(len(c_code))
+ 
+print(c_code[30])
+print(c_code[82])
+ 
+print(82 in c_code)
+print(60 in c_code)
+ 
+c_code[60]='m'
+print(60 in c_code)
+ 
+print(c_code.pop(81))
+print(81 in c_code)
+ 
+//
+ 
+ 
+ 
+ 
+ 
+ 
+##dictionary method
+d.items
+d.get(k)
+d.keys(k)
+d.pop()
+d.values(k)
+d.update(d2)
+dict(listname)
+ 
+//
+ 
+ 
+sp= {'one':'uno','two':'dos','three':'tres'}
+print(sp.get('two'))
+print(sp['one'])
+ 
+print(sp.keys())
+print(sp.pop('one'))
+print(sp)
+print(sp.values())
+ 
+//
+ 
+ 
+
