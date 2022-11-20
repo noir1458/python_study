@@ -23,6 +23,7 @@ def buildCityDict():
         line = fhandle.readline()
         if(0==len(line)):
             break
+
         split_line = line.split(',')
         
         city = split_line[0][1:-1]
@@ -44,7 +45,7 @@ def main():
         if("stop"== city_name):
             break
         location = findLocation(city_dict,city_name)
-        print(location)
+        print("Location :", location)
     
     return None
 
