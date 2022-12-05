@@ -25,22 +25,50 @@ class _Rectangle(): # _ => user defined, (): later
 
     # print width & height
     def _print(self):
+        print("color =", self.color__, "and border =", self.border__)
         print("width =",self.width_, "and height =",self.height_)
         return None
+    
+    def _get_width(self):
+        return self.width_
+    
+    def _get_height(self):
+        return self.height_
 
-
+    def _set_width(self, w):
+        self.width_ = w
+        return None
+    
+    def _set_height(self, h):
+        self.height_ = h
+        return None
+    '''
+    def _set_bgcolor(self, color):
+        _Rectangle.color__ = color # 안좋은 방법
+    '''
 
 def main():
-    rect1 = _Rectangle(4, 3) # 4cm * 3cm rectangle # self가 숨어있다...(에러메세지로 확인가능), class 메소드에도 숨어있음.
-    rect2 = _Rectangle(1, 6) # 1 * 6. 
-    rect3 = _Rectangle()
-    #print(" ==> 4", rect1)
-    #print(" ==> 5", rect2)
+    rect0 = _Rectangle()
+    rect1 = _Rectangle(4, 3) # 4cm * 3cm rectangle # self가 숨어있다...(에러메세지로 확인가능), class 메소드에도 숨어있음. 
+    
+    print(rect1.width_, rect1.height_)
+    # rect1.height_ = 10
+    # rect1.width_ = 200
+    rect1._set_width(200)
+    rect1._set_height(10)
+    '''
     rect1._print()
+    rect2 = _Rectangle(6, 1) # 1 * 6.
     rect2._print()
-    rect3._print()
-    print("rect1 area is = ", rect1._area())
-    print(rect2._area())
+    #rect2.color__ = "yellow"    # <== class variable X 
+    #_Rectangle.color__ = "yellow"   # <== class variable O, 그러나 클래스를 새로 만드는게 낫다.
+    rect1._print()
+    rect2._print()'''
+
+    # area : method1
+    area = rect1.height_*rect1.width_
+    # area : via OOP
+    print("The area of rect1 =", rect1._area())
 
     return None
 
