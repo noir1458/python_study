@@ -1,0 +1,7 @@
+Total number of GC = 1633958
+Total number of AT = 1851600
+Total number of Nucleotides = 3485558
+GC-Content = 46.87794608495971%
+AT-Content = 53.12205391504029%
+AT/GC Ratio = 1.1331992621597373
+The classification result = Muggle
