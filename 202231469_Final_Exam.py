@@ -79,7 +79,7 @@ class _GBaio():
 def main():       
     print("+++++++++ Final Exam +++++++++")
     # please modify ****** and xxxxxx
-    print("My name is 서정민 and ID is 202231469")
+    print("My name is 000 and ID is 202231469")
     # input file and output file paths
     ifpath, ofpath = "./", "./"
     # in/output file names
